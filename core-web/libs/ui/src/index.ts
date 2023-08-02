@@ -10,3 +10,4 @@ export * from './lib/dot-site-selector/dot-site-selector.directive';
 export * from './lib/dot-icon-button/dot-icon-button.module';
 export * from './lib/dot-icon-button/dot-icon-button.component';
 export * from './lib/components/dot-empty-container/dot-empty-container.component';
+export * from './lib/dot-tab-buttons/dot-tab-buttons.component';
