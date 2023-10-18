@@ -335,6 +335,18 @@ export class DotBubbleMenuPluginView extends BubbleMenuView {
                 this.editor.commands.toggleUnderline();
                 break;
 
+            case 'io_property':
+                this.editor.commands.toggleProperty();
+                break;
+
+            case 'io_notranslate':
+                this.editor.commands.toggleNoTranslate();
+                break;
+
+            // case 'anchor':
+            //     this.editor.commands.toggleAnchor();
+            //     break;
+
             case 'left':
                 this.toggleTextAlign(action, active);
                 break;
