@@ -183,12 +183,25 @@ export class BubbleLinkFormView {
         return isOverflow || isNodeImage ? domRect : nodeClientRect;
     }
 
-    setLinkValues({ link, blank = false }) {
+    async setLinkValues({ link, blank = false }) {
         if (link.length > 0) {
-            const href = this.formatLink(link);
+            const href = await this.getDynamicLinkByPath(this.formatLink(link));
             this.isImageNode()
                 ? this.editor.commands.setImageLink({ href })
                 : this.editor.commands.setLink({ href, target: blank ? '_blank' : '_top' });
+        }
+    }
+
+    async getDynamicLinkByPath(path: string) {
+        if (path.startsWith('$')) {
+            return path;
+        } else {
+            const response = await fetch('/app/direct/dynamiclink/byPath?path=' + path);
+            const dynamicLinkCodeResponse = await response.json();
+
+            return dynamicLinkCodeResponse.code
+                ? '$dynamicLink.get("' + dynamicLinkCodeResponse.code + '")'
+                : dynamicLinkCodeResponse.path;
         }
     }
 
