@@ -146,7 +146,7 @@ export class BubbleLinkFormComponent implements OnInit {
      * @param {NodeProps} { link, blank }
      * @memberof BubbleLinkFormComponent
      */
-    setFormValue({ link = '', blank = true }: NodeProps) {
+    setFormValue({ link = '', blank = false }: NodeProps) {
         this.form.setValue({ link, blank }, { emitEvent: false });
     }
 
