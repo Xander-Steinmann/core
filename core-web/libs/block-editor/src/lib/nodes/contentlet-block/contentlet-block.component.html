@@ -11,7 +11,7 @@
 
     <h3 class="title" *pTemplate="'title'">{{ data.title }}</h3>
     <span *pTemplate="'subtitle'">{{ data.contentType }}</span>
-
+    <a href="/dotAdmin/#/c/content/{{ data.inode }}" target="_blank">Edit content</a>
     <ng-template pTemplate="footer">
         <div class="state">
             <dot-state-icon [state]="data | contentletState" size="16px"> </dot-state-icon>
