@@ -46,3 +46,8 @@ export * from './dot-table/dot-table.extension';
 export * from './dot-table/dot-table-cell.extension';
 export * from './dot-table/dot-table-cell.plugin';
 export * from './dot-table/dot-table-header.extension';
+
+// Custom iO
+export * from '../marks/property/property.mark';
+export * from '../marks/notranslate/notranslate.mark';
+//export * from '../nodes/anchor-node/anchor.node'

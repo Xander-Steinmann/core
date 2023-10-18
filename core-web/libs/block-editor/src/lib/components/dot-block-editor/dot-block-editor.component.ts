@@ -36,7 +36,9 @@ import {
     DotTableHeaderExtension,
     BubbleAssetFormExtension,
     removeInvalidNodes,
-    VideoNode
+    VideoNode,
+    IONoTranslateMark,
+    IOPropertyMark
 } from '@dotcms/block-editor';
 
 // Marks Extensions
@@ -242,6 +244,8 @@ export class DotBlockEditorComponent implements OnInit, OnDestroy {
             DotTableCellExtension(this.viewContainerRef),
             BubbleAssetFormExtension(this.viewContainerRef),
             DotTableHeaderExtension(),
+            IONoTranslateMark,
+            IOPropertyMark,
             TableRow,
             CharacterCount
         ];

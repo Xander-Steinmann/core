@@ -133,9 +133,24 @@ const textMarks: Array<BubbleMenuItem> = [
     {
         icon: 'strikethrough_s',
         markAction: 'strike',
-        active: false,
-        divider: true
+        active: false
+    },
+    {
+        icon: 'description',
+        markAction: 'io_property',
+        active: false
+    },
+    {
+        icon: 'translate',
+        markAction: 'io_notranslate',
+        active: false
     }
+    // {
+    //     icon: 'anchor',
+    //     markAction: 'anchor',
+    //     active: false,
+    //     divider: true
+    // }
 ];
 
 const alignmentMarks: Array<BubbleMenuItem> = [
