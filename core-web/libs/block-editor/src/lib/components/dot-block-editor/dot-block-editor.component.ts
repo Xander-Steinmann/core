@@ -14,6 +14,8 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { AnyExtension, Content, Editor, JSONContent } from '@tiptap/core';
 import { Level } from '@tiptap/extension-heading';
+import { Subscript } from '@tiptap/extension-subscript';
+import { Superscript } from '@tiptap/extension-superscript';
 import StarterKit, { StarterKitOptions } from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 
@@ -37,6 +39,7 @@ import {
     BubbleAssetFormExtension,
     removeInvalidNodes,
     VideoNode,
+    RestoreDefaultDOMAttrs,
     IONoTranslateMark,
     IOPropertyMark
 } from '@dotcms/block-editor';
@@ -141,10 +144,17 @@ export class DotBlockEditorComponent implements OnInit, OnDestroy {
     }
 
     private updateChartCount(): void {
-        const tr = this.editor.state.tr
-            .step(new SetDocAttrStep('chartCount', this.characterCount.characters()))
-            .step(new SetDocAttrStep('wordCount', this.characterCount.words()))
-            .step(new SetDocAttrStep('readingTime', this.readingTime));
+        const tr = this.editor.state.tr.setMeta('addToHistory', false);
+
+        if (this.characterCount.characters() != 0) {
+            tr.step(new SetDocAttrStep('chartCount', this.characterCount.characters()))
+                .step(new SetDocAttrStep('wordCount', this.characterCount.words()))
+                .step(new SetDocAttrStep('readingTime', this.readingTime));
+        } else {
+            // If the content is empty, we need to remove the attributes
+            tr.step(new RestoreDefaultDOMAttrs());
+        }
+
         this.editor.view.dispatch(tr);
     }
 
@@ -233,6 +243,8 @@ export class DotBlockEditorComponent implements OnInit, OnDestroy {
                 allowedContentTypes: this.allowedContentTypes,
                 allowedBlocks: this._allowedBlocks
             }),
+            Subscript,
+            Superscript,
             Placeholder.configure({ placeholder: this.placeholder }),
             ActionsMenu(this.viewContainerRef),
             DragHandler(this.viewContainerRef),
